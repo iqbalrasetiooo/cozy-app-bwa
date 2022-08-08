@@ -18,7 +18,7 @@ class HomePage extends StatelessWidget {
         bottom: false,
         child: ListView(
           children: [
-            const SizedBox(height: 30),
+            const SizedBox(height: 24),
             //NOTE: TITLE/HEADER
             Padding(
               padding: EdgeInsets.symmetric(horizontal: edge),
@@ -164,7 +164,7 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 70,
+              height: 50 + 24,
             ),
           ],
         ),
@@ -187,15 +187,12 @@ class HomePage extends StatelessWidget {
             ),
             BottomNavbarItem(
               imageUrl: 'assets/Icon_mail_solid.svg',
-              isActive: false,
             ),
             BottomNavbarItem(
               imageUrl: 'assets/Icon_card_solid.svg',
-              isActive: false,
             ),
             BottomNavbarItem(
               imageUrl: 'assets/Icon_love_solid.svg',
-              isActive: false,
             ),
           ],
         ),
