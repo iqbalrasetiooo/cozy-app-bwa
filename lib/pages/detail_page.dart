@@ -1,4 +1,6 @@
+import 'package:find_house_app/model/facility.dart';
 import 'package:find_house_app/theme.dart';
+import 'package:find_house_app/widgets/facility_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,8 +53,10 @@ class DetailPage extends StatelessWidget {
                     color: whiteColor,
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 30),
+                      //NOTE: TITLE
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: edge),
                         child: Row(
@@ -75,7 +79,8 @@ class DetailPage extends StatelessWidget {
                                       TextSpan(
                                         text: '/ Month',
                                         style: greyTextStyle.copyWith(
-                                            fontSize: 16),
+                                          fontSize: 16,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -114,6 +119,133 @@ class DetailPage extends StatelessWidget {
                           ],
                         ),
                       ),
+                      const SizedBox(height: 30),
+                      //NOTE: MAIN FACILITIES
+                      Padding(
+                        padding: EdgeInsets.only(left: edge),
+                        child: Text(
+                          'Main Facilities',
+                          style: regularTextStyle.copyWith(
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Padding(
+                        padding: EdgeInsets.only(left: edge, right: edge),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            FacilityItem(
+                              facility: Facility(
+                                name: 'kitchen',
+                                total: 2,
+                                imageUrl: 'assets/icon_kitchen.svg',
+                              ),
+                            ),
+                            FacilityItem(
+                              facility: Facility(
+                                name: 'bedroom',
+                                total: 3,
+                                imageUrl: 'assets/icon_bedroom.svg',
+                              ),
+                            ),
+                            FacilityItem(
+                              facility: Facility(
+                                name: 'Big Lemari',
+                                total: 3,
+                                imageUrl: 'assets/icon_cupboard.svg',
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: EdgeInsets.only(left: edge),
+                        child: Text(
+                          'Photos',
+                          style: regularTextStyle.copyWith(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Container(
+                        height: 88,
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            SizedBox(width: edge),
+                            Image.asset(
+                              'assets/photo1.png',
+                              width: 110,
+                              height: 88,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(width: 18),
+                            Image.asset(
+                              'assets/photo2.png',
+                              width: 110,
+                              height: 88,
+                              fit: BoxFit.cover,
+                            ),
+                            const SizedBox(width: 18),
+                            Image.asset(
+                              'assets/photo3.png',
+                              width: 110,
+                              height: 88,
+                              fit: BoxFit.cover,
+                            ),
+                            SizedBox(width: edge),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+                      Padding(
+                        padding: EdgeInsets.only(left: edge),
+                        child: Text(
+                          'Location',
+                          style: regularTextStyle.copyWith(fontSize: 16),
+                        ),
+                      ),
+                      const SizedBox(height: 6),
+                      Padding(
+                        padding: EdgeInsets.only(left: edge, right: edge),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text('Jln. Kappan Sukses No. 20\nPalembang',
+                                style: greyTextStyle.copyWith(fontSize: 14)),
+                            SvgPicture.asset('assets/btn_location.svg'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 40),
+                      Padding(
+                        padding: EdgeInsets.only(left: edge, right: edge),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(17),
+                          child: Container(
+                            height: 50,
+                            width: MediaQuery.of(context).size.width,
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  purpleColor,
+                                ),
+                              ),
+                              child: Text(
+                                'Book Now',
+                                style: whiteTextStyle.copyWith(
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 40),
                     ],
                   ),
                 ),
