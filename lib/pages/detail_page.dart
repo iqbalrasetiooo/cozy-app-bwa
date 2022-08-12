@@ -1,4 +1,5 @@
 import 'package:find_house_app/model/facility.dart';
+import 'package:find_house_app/pages/error_page.dart';
 import 'package:find_house_app/theme.dart';
 import 'package:find_house_app/widgets/facility_item.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,6 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Future<void> launchUrl(Uri url) async {
-    //   await UrlLauncher.canLaunchUrl(url) ? await launchUrl(url) : throw (url);
-    // }
-
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -210,7 +207,12 @@ class DetailPage extends StatelessWidget {
                                 if (await UrlLauncher.canLaunchUrl(maps)) {
                                   UrlLauncher.launchUrl(maps);
                                 } else {
-                                  print("can't launch $maps");
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const ErrorPage(),
+                                    ),
+                                  );
                                 }
                               },
                               child:
@@ -231,7 +233,12 @@ class DetailPage extends StatelessWidget {
                               if (await UrlLauncher.canLaunchUrl(phone)) {
                                 UrlLauncher.launchUrl(phone);
                               } else {
-                                print("can't launch $phone");
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const ErrorPage(),
+                                  ),
+                                );
                               }
                             },
                             // onPressed: () {
