@@ -8,15 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
   final Space space;
 
   const DetailPage({Key? key, required this.space}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    var photos = space.photos;
+  State<DetailPage> createState() => _DetailPageState();
+}
 
+class _DetailPageState extends State<DetailPage> {
+  @override
+  Widget build(BuildContext context) {
+    bool isSelected = false;
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -24,7 +28,7 @@ class DetailPage extends StatelessWidget {
         child: Stack(
           children: [
             Image.network(
-              space.imageUrl,
+              widget.space.imageUrl,
               height: 350,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
@@ -54,13 +58,13 @@ class DetailPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  space.name,
+                                  widget.space.name,
                                   style: blackTextStyle.copyWith(fontSize: 22),
                                 ),
                                 const SizedBox(height: 2),
                                 Text.rich(
                                   TextSpan(
-                                    text: '\$${space.price} ',
+                                    text: '\$${widget.space.price} ',
                                     style:
                                         purpleTextStyle.copyWith(fontSize: 16),
                                     children: [
@@ -81,7 +85,7 @@ class DetailPage extends StatelessWidget {
                                   margin: const EdgeInsets.only(left: 2),
                                   child: RatingItem(
                                     index: index,
-                                    rating: space.rating,
+                                    rating: widget.space.rating,
                                   ),
                                 );
                               }).toList(),
@@ -109,21 +113,21 @@ class DetailPage extends StatelessWidget {
                             FacilityItem(
                               facility: Facility(
                                 name: 'kitchen',
-                                total: space.numberOfKitchens,
+                                total: widget.space.numberOfKitchens,
                                 imageUrl: 'assets/icon_kitchen.svg',
                               ),
                             ),
                             FacilityItem(
                               facility: Facility(
                                 name: 'bedroom',
-                                total: space.numberOfBedrooms,
+                                total: widget.space.numberOfBedrooms,
                                 imageUrl: 'assets/icon_bedroom.svg',
                               ),
                             ),
                             FacilityItem(
                               facility: Facility(
                                 name: 'Big Lemari',
-                                total: space.numberOfCupboards,
+                                total: widget.space.numberOfCupboards,
                                 imageUrl: 'assets/icon_cupboard.svg',
                               ),
                             ),
@@ -143,7 +147,7 @@ class DetailPage extends StatelessWidget {
                         height: 88,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
-                          children: space.photos.map<Widget>((item) {
+                          children: widget.space.photos.map<Widget>((item) {
                             return Container(
                               margin: EdgeInsets.only(left: edge),
                               child: ClipRRect(
@@ -175,12 +179,12 @@ class DetailPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              '${space.address},\n${space.city}',
+                              '${widget.space.address},\n${widget.space.city}',
                               style: greyTextStyle.copyWith(fontSize: 14),
                             ),
                             InkWell(
                               onTap: () async {
-                                final maps = Uri.parse(space.mapUrl);
+                                final maps = Uri.parse(widget.space.mapUrl);
                                 if (await UrlLauncher.canLaunchUrl(maps)) {
                                   UrlLauncher.launchUrl(maps);
                                 } else {
@@ -206,7 +210,8 @@ class DetailPage extends StatelessWidget {
                           width: MediaQuery.of(context).size.width - (2 * edge),
                           child: ElevatedButton(
                             onPressed: () async {
-                              final phone = Uri.parse('tel:${space.phone}');
+                              final phone =
+                                  Uri.parse('tel:${widget.space.phone}');
                               if (await UrlLauncher.canLaunchUrl(phone)) {
                                 UrlLauncher.launchUrl(phone);
                               } else {
@@ -262,9 +267,18 @@ class DetailPage extends StatelessWidget {
                       width: 40,
                     ),
                   ),
-                  SvgPicture.asset(
-                    'assets/btn_wishlist.svg',
-                    width: 40,
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        isSelected = !isSelected;
+                      });
+                    },
+                    child: Image.asset(
+                      isSelected
+                          ? 'assets/btn_wishlist_selected.png'
+                          : 'assets/btn_wishlist.png',
+                      width: 40,
+                    ),
                   ),
                 ],
               ),
