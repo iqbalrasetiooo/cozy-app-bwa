@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "451174502084",
+    "project_id": "bwa-cozy-73a16",
+    "storage_bucket": "bwa-cozy-73a16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:451174502084:android:45a9512b2d6ae55ecc4391",
+        "android_client_info": {
+          "package_name": "com.example.find_house_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "451174502084-nn8449453hp9v5cv6jg0fh8vo641puua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9gT1hpOv3GbhvJTd7i-dQuMMoV_4QC7w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "451174502084-nn8449453hp9v5cv6jg0fh8vo641puua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
