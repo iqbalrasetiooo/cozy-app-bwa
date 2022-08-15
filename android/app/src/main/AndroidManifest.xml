@@ -21,7 +21,7 @@
    <application
         android:label="find_house_app"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -48,5 +48,7 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <!-- <uses-sdk android:minSdkVersion="31" android:targetSdkVersion="31" /> -->
     </application>
+    
 </manifest>
