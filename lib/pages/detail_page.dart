@@ -21,6 +21,51 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     bool isSelected = false;
+
+    Future<void> showConfirmation() async {
+      return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            backgroundColor: purpleColor,
+            title: const Text('Konfirmasi'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('Apakah kamu ingin menghubungi pemilik kos?'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('Batal'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              TextButton(
+                child: const Text('Ya'),
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  final phone = Uri.parse('tel:${widget.space.phone}');
+                  if (await UrlLauncher.canLaunchUrl(phone)) {
+                    UrlLauncher.launchUrl(phone);
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ErrorPage(),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+
     return Scaffold(
       backgroundColor: whiteColor,
       body: SafeArea(
@@ -205,23 +250,12 @@ class _DetailPageState extends State<DetailPage> {
                       const SizedBox(height: 40),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: edge),
-                        child: Container(
+                        child: SizedBox(
                           height: 50,
                           width: MediaQuery.of(context).size.width - (2 * edge),
                           child: ElevatedButton(
-                            onPressed: () async {
-                              final phone =
-                                  Uri.parse('tel:${widget.space.phone}');
-                              if (await UrlLauncher.canLaunchUrl(phone)) {
-                                UrlLauncher.launchUrl(phone);
-                              } else {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const ErrorPage(),
-                                  ),
-                                );
-                              }
+                            onPressed: () {
+                              showConfirmation();
                             },
                             // onPressed: () {
                             //   UrlLauncher.launchUrl(
